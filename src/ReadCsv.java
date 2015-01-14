@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -11,6 +12,7 @@ import java.util.Properties;
 import Indexing.IndexInES;
 
 import com.google.gson.Gson;
+import com.opencsv.CSVReader;
 
 import model.Model;
 
@@ -59,11 +61,19 @@ public class ReadCsv {
 	          br = new BufferedReader(new FileReader(file));  
 	          while ((line = br.readLine()) != null) {  
 	         
-	           String[] data = line.split(splitBy);  
-	         
+	           //String[] data = line.split(splitBy);  
+	        	  char seperator=' ';
+	        	  CSVReader reader = new CSVReader(new StringReader(line),seperator);
+
+	        	  String [] tokens;
+	        	  while ((tokens = reader.readNext()) != null) {
+	        	      System.out.println(tokens[0]); // value1
+	        	      
+	        	      Model model=new Model(tokens);
+	    	          modelList.add(model);
+	        	  }
 	                    
-	          Model model=new Model(data);
-	          modelList.add(model);
+	          
 	          
 	           
 	          } 

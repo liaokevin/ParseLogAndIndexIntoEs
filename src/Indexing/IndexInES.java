@@ -22,7 +22,7 @@ public class IndexInES {
 		//CreateIndexRequestBuilder createIndexRequestBuilder = client.admin().indices().prepareCreate("logs1");
 	   // CreateIndexResponse response = createIndexRequestBuilder.execute().actionGet();
 	   // System.out.println(response.isAcknowledged());  
-		IndexResponse response1 = client.prepareIndex("logs1", "log")
+		IndexResponse response1 = client.prepareIndex(ES_index, "log")
 		        .setSource(json)
 		        .execute()
 		        .actionGet();
