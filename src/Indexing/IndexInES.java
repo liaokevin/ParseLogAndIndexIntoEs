@@ -6,6 +6,8 @@ import org.elasticsearch.action.index.IndexResponse;
 import static org.elasticsearch.node.NodeBuilder.*;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.client.transport.TransportClient;
+import org.elasticsearch.common.settings.ImmutableSettings;
+import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.elasticsearch.node.Node;
 
@@ -15,7 +17,14 @@ public class IndexInES {
 	{
 		System.out.println(json);
 		System.out.println("ES "+ES_server+ES_port+ES_index);
-		//Node node = nodeBuilder().local(true).node();
+		
+		//*****user this if there is cluster with "cybox"
+		
+		/*Settings settings = ImmutableSettings.settingsBuilder()
+        .put("cluster.name", "cybox").build();
+		Client client = new TransportClient(settings)*/
+		
+		//****Else(for default)
 		Client client = new TransportClient()
         .addTransportAddress(new InetSocketTransportAddress(ES_server, Integer.valueOf(ES_port)));
 		
